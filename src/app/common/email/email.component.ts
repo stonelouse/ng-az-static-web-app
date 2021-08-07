@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmailValidationService } from './validation-service.service';
 
 @Component({
@@ -10,10 +10,11 @@ import { EmailValidationService } from './validation-service.service';
 export class EmailComponent implements OnInit {
   
   private readonly initialValue: string = 'russ.c@eplan.de';
-  // readonly emailControl: FormControl = new FormControl(this.initialValue);
+
   readonly emailForm = new FormGroup({
-    email: new FormControl(this.initialValue)
+    email: new FormControl(this.initialValue, Validators.required)
   });
+  validationState: "init" | "valid" | "invalid" = "init";
 
   constructor(private readonly validation: EmailValidationService) {
     this.emailForm.get('email').valueChanges.subscribe((value: string) => console.log('#01', value));
@@ -28,6 +29,8 @@ export class EmailComponent implements OnInit {
 
   onSubmit(): void {
     console.log('#02', {form: this.emailForm.value});
-    this.validation.validateEmail(this.emailForm.value).subscribe();
+    this.validation.validateEmail(this.emailForm.value).subscribe(
+      (valid: boolean) => this.validationState = valid ? "valid" : "invalid"
+    );
   }
 }
