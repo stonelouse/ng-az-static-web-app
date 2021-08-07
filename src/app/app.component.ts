@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
-  template: `<div>{{value}}</div>`,
+  template: `
+  <div>{{value}}</div>
+  <app-email></app-email>
+  `,
 })
 export class AppComponent {
   value = 'World';
