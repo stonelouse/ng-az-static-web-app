@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EmailValidationService } from './validation-service.service';
 
 @Component({
   selector: 'app-email',
@@ -14,7 +15,7 @@ export class EmailComponent implements OnInit {
     email: new FormControl(this.initialValue)
   });
 
-  constructor() {
+  constructor(private readonly validation: EmailValidationService) {
     this.emailForm.get('email').valueChanges.subscribe((value: string) => console.log('#01', value));
    }
 
@@ -27,5 +28,6 @@ export class EmailComponent implements OnInit {
 
   onSubmit(): void {
     console.log('#02', {form: this.emailForm.value});
+    this.validation.validateEmail(this.emailForm.value).subscribe();
   }
 }
