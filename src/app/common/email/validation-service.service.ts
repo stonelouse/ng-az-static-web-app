@@ -12,9 +12,9 @@ export class EmailValidationService {
   constructor(private readonly http: HttpClient) {  }
 
   validateEmail(emailForm: {email: string}): Observable<boolean> {
-    const host: string = `${environment.apiHost}api/emailvalidation`;
-    console.log('#05#', {host});
-    return this.http.post<{valid: boolean}>(host, emailForm).pipe(
+    const apiUrl: string = `${environment.apiHost}api/emailvalidation`;
+    console.log('#05#', {apiUrl});
+    return this.http.post<{valid: boolean}>(apiUrl, emailForm).pipe(
       map((resp: {valid: boolean}) => {
         console.log('#04#', resp);
         return resp.valid;
