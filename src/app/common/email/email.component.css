@@ -1,0 +1,9 @@
+input.unknown {
+    background-color: aliceblue;
+}
+input.valid {
+    background-color: greenyellow;
+}
+input.invalid {
+    background-color: lightpink;
+}

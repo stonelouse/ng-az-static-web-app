@@ -1,0 +1,10 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+    <label for="email">Email:</label>
+    <div>
+        <input id="email" [ngClass]="validationState" type="text" formControlName="email">
+    </div>
+    <div>
+        <button (click)="onInit()">Initialize</button>
+        <button type="submit" [disabled]="emailForm.invalid">Submit</button>
+    </div>
+</form>
